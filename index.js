@@ -1,5 +1,6 @@
 const userInput = document.querySelector('input#user-input');
 const confirmationButton = document.querySelector('button#confirm');
+const messageSpan = document.querySelector('span#message');
 const shapeArea = document.querySelector('div#shape-area');
 
 let clickTimeout = null;
@@ -31,11 +32,21 @@ const shapeDblClick = (ev) => {
 
 confirmationButton.onclick = () => {
   shapeArea.innerHTML = '';
+  messageSpan.style.color = 'unset';
+  messageSpan.innerText = 'Loading...';
   const usedColors = new Set();
 
   fetch(`${window.location.href.replace(/(:\d*)?\/$/, '')}/api?payload=${userInput.value}`)
-    .then((res) => res.json())
+    .then((res) => {
+      if (!res.ok) {
+        return res.text().then((text) => {
+          throw new Error(text);
+        });
+      }
+      return res.text();
+    })
     .then((data) => {
+      messageSpan.innerText = '';
       const chosenAmount = data;
 
       for (let index = 0; index < chosenAmount; index += 1) {
@@ -62,5 +73,9 @@ confirmationButton.onclick = () => {
 
         shapeArea.appendChild(newShape);
       }
+    })
+    .catch((err) => {
+      messageSpan.style.color = 'red';
+      messageSpan.innerText = err;
     });
 };
