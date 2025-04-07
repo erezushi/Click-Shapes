@@ -1,0 +1,14 @@
+body {
+  height: calc(100vh - 16px);
+}
+
+.shape {
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  margin: 0.5em;
+}
+
+.circle {
+  border-radius: 50px;
+}
