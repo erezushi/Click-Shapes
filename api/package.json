@@ -3,18 +3,19 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "start": "node --loader ts-node/esm index.ts"
+    "build": "tsc",
+    "build:watch": "tsc -w",
+    "start": "node build/index.js"
   },
   "keywords": [],
   "author": "Erez Bracha",
   "license": "ISC",
-  "type": "module",
+  "type": "commonjs",
   "description": "API for the Click Shapes programming task",
   "dependencies": {
     "@types/node": "^22.14.0",
     "dotenv": "^16.4.7",
     "fastify": "^5.2.2",
-    "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }
 }
