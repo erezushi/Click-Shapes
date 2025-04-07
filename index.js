@@ -33,7 +33,7 @@ confirmationButton.onclick = () => {
   shapeArea.innerHTML = '';
   const usedColors = new Set();
 
-  fetch(`${window.location.href.replace(/(:\d*)?\/$/, '')}:8080/api?payload=${userInput.value}`)
+  fetch(`${window.location.href.replace(/(:\d*)?\/$/, '')}/api?payload=${userInput.value}`)
     .then((res) => res.json())
     .then((data) => {
       const chosenAmount = data;
